@@ -28,4 +28,19 @@
             </div>
         </dl>
     </section>
+
+    <section class="mt-8 rounded border border-line bg-white" aria-labelledby="acara">
+        <h2 id="acara" class="border-b border-line px-5 py-3 text-sm font-medium">Acara Anda</h2>
+        @forelse ($events as $event)
+            <div class="flex flex-col gap-1 border-b border-line px-5 py-3 text-sm last:border-b-0 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <a href="{{ route('admin.events.show', $event) }}" class="font-medium text-accent hover:underline">{{ $event->name }}</a>
+                    <p class="text-muted">{{ $event->event_date->format('d/m/Y') }} · {{ $event->venue_name }}</p>
+                </div>
+                <x-status-badge :status="$event->status" />
+            </div>
+        @empty
+            <p class="px-5 py-6 text-sm text-muted">Belum ada acara yang ditugaskan kepada Anda.</p>
+        @endforelse
+    </section>
 @endsection

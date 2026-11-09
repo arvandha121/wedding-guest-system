@@ -18,6 +18,16 @@
             <x-nav-link :href="route(auth()->user()->homeRouteName())" :active="request()->routeIs(auth()->user()->homeRouteName())">
                 Dashboard
             </x-nav-link>
+            @if (auth()->user()->role->isAdmin())
+                <x-nav-link :href="route('admin.events.index')" :active="request()->routeIs('admin.events.*')">
+                    Acara
+                </x-nav-link>
+            @endif
+            @if (auth()->user()->isSuperAdmin())
+                <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                    Pengguna
+                </x-nav-link>
+            @endif
         </nav>
     </aside>
 
@@ -47,6 +57,12 @@
 
         <main class="px-4 py-8 lg:px-10">
             <div class="mx-auto max-w-5xl">
+                @if (session('status'))
+                    <div class="mb-6 rounded border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900" role="status">{{ session('status') }}</div>
+                @endif
+                @if (session('error'))
+                    <div class="mb-6 rounded border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-900" role="alert">{{ session('error') }}</div>
+                @endif
                 @yield('content')
             </div>
         </main>

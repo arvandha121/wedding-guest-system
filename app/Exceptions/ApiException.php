@@ -6,11 +6,14 @@ namespace App\Exceptions;
 
 use App\Support\ApiResponse;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use RuntimeException;
 use Throwable;
 
 /**
  * Kesalahan bisnis yang diketahui; membawa kode error API dan status HTTP.
+ * API menerima JSON standar; halaman web kembali ke form dengan pesan error.
  */
 class ApiException extends RuntimeException
 {
@@ -24,8 +27,12 @@ class ApiException extends RuntimeException
         parent::__construct($message, 0, $previous);
     }
 
-    public function render(): JsonResponse
+    public function render(Request $request): JsonResponse|RedirectResponse
     {
-        return ApiResponse::error($this->getMessage(), $this->errorCode, $this->status, $this->errors);
+        if ($request->is('api/*') || $request->expectsJson()) {
+            return ApiResponse::error($this->getMessage(), $this->errorCode, $this->status, $this->errors);
+        }
+
+        return redirect()->back()->withInput()->with('error', $this->getMessage());
     }
 }

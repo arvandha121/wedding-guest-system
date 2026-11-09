@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\EventController;
+use App\Http\Controllers\Api\V1\EventMemberController;
+use App\Http\Controllers\Api\V1\EventSessionController;
 use App\Http\Controllers\Api\V1\HealthController;
 use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Support\Facades\Route;
@@ -24,8 +27,36 @@ Route::name('api.v1.')->group(function (): void {
     });
 
     Route::middleware(['auth:sanctum', 'active', 'throttle:api'])->group(function (): void {
-        Route::get('users', [UserController::class, 'index'])
-            ->middleware('role:super_admin')
-            ->name('users.index');
+        // Manajemen pengguna: hanya Super Admin
+        Route::middleware('role:super_admin')->prefix('users')->name('users.')->group(function (): void {
+            Route::get('/', [UserController::class, 'index'])->name('index');
+            Route::post('/', [UserController::class, 'store'])->name('store');
+            Route::get('{user}', [UserController::class, 'show'])->name('show');
+            Route::put('{user}', [UserController::class, 'update'])->name('update');
+            Route::patch('{user}/status', [UserController::class, 'status'])->name('status');
+            Route::delete('{user}', [UserController::class, 'destroy'])->name('destroy');
+        });
+
+        // Acara: akses dibatasi policy + route binding (404 untuk acara di luar penugasan)
+        Route::prefix('events')->name('events.')->group(function (): void {
+            Route::get('/', [EventController::class, 'index'])->name('index');
+            Route::post('/', [EventController::class, 'store'])->name('store');
+            Route::post('{trashedEvent}/restore', [EventController::class, 'restore'])->name('restore');
+            Route::get('{event}', [EventController::class, 'show'])->name('show');
+            Route::put('{event}', [EventController::class, 'update'])->name('update');
+            Route::patch('{event}/status', [EventController::class, 'status'])->name('status');
+            Route::delete('{event}', [EventController::class, 'destroy'])->name('destroy');
+
+            Route::get('{event}/sessions', [EventSessionController::class, 'index'])->name('sessions.index');
+            Route::post('{event}/sessions', [EventSessionController::class, 'store'])->name('sessions.store');
+
+            Route::get('{event}/members', [EventMemberController::class, 'index'])->name('members.index');
+            Route::post('{event}/members', [EventMemberController::class, 'store'])->name('members.store');
+            Route::delete('{event}/members/{user}', [EventMemberController::class, 'destroy'])->name('members.destroy');
+            Route::post('{event}/receptionists', [EventMemberController::class, 'storeReceptionist'])->name('receptionists.store');
+        });
+
+        Route::put('sessions/{eventSession}', [EventSessionController::class, 'update'])->name('sessions.update');
+        Route::delete('sessions/{eventSession}', [EventSessionController::class, 'destroy'])->name('sessions.destroy');
     });
 });

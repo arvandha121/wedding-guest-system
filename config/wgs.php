@@ -18,6 +18,11 @@ return [
     ],
 
     /*
+    | Tema undangan yang tersedia (template dibuat pada Phase 4).
+    */
+    'themes' => ['classic', 'minimal', 'garden'],
+
+    /*
     | Batas percobaan login per menit untuk kombinasi email + IP.
     */
     'login_attempts_per_minute' => (int) env('WGS_LOGIN_ATTEMPTS', 5),
