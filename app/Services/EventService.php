@@ -19,8 +19,10 @@ final class EventService
 {
     private const SORTABLE = ['event_date', 'name', 'status', 'created_at'];
 
-    public function __construct(private readonly ImageService $images)
-    {
+    public function __construct(
+        private readonly ImageService $images,
+        private readonly CategoryService $categories,
+    ) {
     }
 
     public function paginate(User $user, array $filters): LengthAwarePaginator
@@ -67,6 +69,7 @@ final class EventService
                 }
 
                 $event->save();
+                $this->categories->seedDefaults($event);
 
                 return $event;
             });

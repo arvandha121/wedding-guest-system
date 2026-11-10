@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title') — {{ config('app.name') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('css/wgs.css') }}">
+    <script type="module" src="{{ asset('js/wgs.js') }}"></script>
 </head>
 <body class="min-h-screen bg-paper font-sans text-ink antialiased" x-data="{ sidebar: false }">
     <div x-show="sidebar" x-cloak @click="sidebar = false" class="fixed inset-0 z-30 bg-ink/40 lg:hidden"></div>

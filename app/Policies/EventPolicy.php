@@ -40,6 +40,11 @@ class EventPolicy
         return $this->update($user, $event);
     }
 
+    public function manageGuests(User $user, Event $event): bool
+    {
+        return $this->update($user, $event);
+    }
+
     public function viewMembers(User $user, Event $event): bool
     {
         return $this->update($user, $event);

@@ -1,0 +1,20 @@
+/* Cadangan utility Tailwind yang tidak ada di build lama (public/build).
+   Aman dihapus setelah `npm run build` dijalankan ulang. */
+.text-muted{color:#6b6f69}.text-ink{color:#1f2421}.text-accent{color:#1f4d3f}.text-danger{color:#9b2c2c}.text-red-900{color:#7f1d1d}
+.bg-paper{background:#f7f6f3}.bg-emerald-50{background:#ecfdf5}.bg-red-50{background:#fef2f2}.bg-ink\/40{background:rgba(31,36,33,.4)}
+.border-line{border-color:#e6e8e2}.border-emerald-200{border-color:#a7f3d0}.border-red-200{border-color:#fecaca}
+.divide-line>*{border-color:#e6e8e2}
+.min-w-full{min-width:100%}.whitespace-nowrap{white-space:nowrap}.flex-wrap{flex-wrap:wrap}.text-left{text-align:left}.font-normal{font-weight:400}
+.list-disc{list-style:disc}.pl-5{padding-left:1.25rem}.pb-2{padding-bottom:.5rem}.mt-3{margin-top:.75rem}.items-end{align-items:flex-end}
+.py-0\.5{padding-block:.125rem}.py-1\.5{padding-block:.375rem}.py-2\.5{padding-block:.625rem}.py-6{padding-block:1.5rem}.py-10{padding-block:2.5rem}
+.space-y-8>*+*{margin-top:2rem}.max-w-lg{max-width:32rem}.max-w-3xl{max-width:48rem}.w-44{width:11rem}
+.translate-x-0{translate:0 0}
+.hover\:underline:hover{text-decoration:underline}.hover\:bg-paper:hover{background:#eef3ef}.hover\:bg-red-50:hover{background:#fef2f2}
+.last\:border-b-0:last-child{border-bottom-width:0}
+@media(min-width:640px){
+ .sm\:block{display:block}.sm\:flex-row{flex-direction:row}.sm\:gap-6{gap:1.5rem}.sm\:w-80{width:20rem}
+ .sm\:items-center{align-items:center}.sm\:items-end{align-items:flex-end}.sm\:items-start{align-items:flex-start}.sm\:justify-between{justify-content:space-between}
+ .sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .sm\:col-span-2{grid-column:span 2/span 2}.sm\:col-span-3{grid-column:span 3/span 3}.sm\:col-span-4{grid-column:span 4/span 4}
+}
+@media(min-width:1024px){.lg\:hidden{display:none}.lg\:translate-x-0{translate:0 0}.lg\:pl-60{padding-left:15rem}.lg\:px-10{padding-inline:2.5rem}}

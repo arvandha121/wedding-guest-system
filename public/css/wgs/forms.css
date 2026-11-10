@@ -1,0 +1,10 @@
+/* Form */
+input:not([type=checkbox]):not([type=radio]):not([type=file]),select,textarea{border-radius:10px!important;border-color:#d9ddd5!important;padding:.6rem .8rem!important;transition:border-color .15s,box-shadow .15s}
+input:not([type=checkbox]):hover,select:hover,textarea:hover{border-color:#b9c2b6!important}
+input:focus,select:focus,textarea:focus{border-color:var(--ac2)!important;box-shadow:0 0 0 4px rgba(47,122,98,.15)!important;outline:none}
+input[type=checkbox]{width:1.05rem;height:1.05rem;accent-color:var(--ac);cursor:pointer}
+label.block{margin-bottom:.1rem;color:#2b332e}
+.wgs-pw{position:relative}.wgs-pw input{padding-right:3.6rem!important}
+.wgs-pw button{position:absolute;right:.45rem;top:50%;transform:translateY(-50%);border:0;background:none;font-size:.75rem;color:var(--ac);padding:.3rem .5rem}
+fieldset{background:#fff;border:1px solid var(--ln);border-radius:var(--r);padding:1.25rem 1.4rem 1.4rem;box-shadow:var(--sh);min-width:0}
+legend{font-weight:600;color:var(--ac);padding:0 .5rem;margin-left:-.5rem}

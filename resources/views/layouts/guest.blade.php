@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Masuk') — {{ config('app.name') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('css/wgs.css') }}">
+    <script type="module" src="{{ asset('js/wgs.js') }}"></script>
 </head>
 <body class="min-h-screen bg-paper font-sans text-ink antialiased">
     <main class="mx-auto flex min-h-screen max-w-sm flex-col justify-center px-6 py-12">

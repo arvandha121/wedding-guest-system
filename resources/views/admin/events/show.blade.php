@@ -31,6 +31,9 @@
 
     <div class="flex flex-wrap items-center gap-2">
         @if ($canUpdate)
+            <a href="{{ route('admin.events.guests.index', $event) }}" class="rounded bg-accent px-3 py-1.5 text-sm font-medium text-white hover:bg-accent-dark">Tamu</a>
+        @endif
+        @if ($canUpdate)
             <a href="{{ route('admin.events.edit', $event) }}" class="rounded border border-line px-3 py-1.5 text-sm hover:bg-paper">Ubah</a>
             @foreach ($event->status->allowedTransitions() as $target)
                 <form method="POST" action="{{ route('admin.events.status', $event) }}">

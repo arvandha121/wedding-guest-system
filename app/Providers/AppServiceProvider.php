@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Models\Event;
 use App\Models\EventSession;
+use App\Models\Guest;
+use App\Models\GuestCategory;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -48,6 +50,19 @@ class AppServiceProvider extends ServiceProvider
                 ->where('ulid', $value)
                 ->firstOrFail();
         });
+
+        foreach (['guest' => Guest::class, 'category' => GuestCategory::class] as $param => $model) {
+            Route::bind($param, function (string $value) use ($model) {
+                $user = request()->user();
+                abort_if($user === null, 404);
+
+                return $model::query()
+                    ->with('event')
+                    ->whereIn('event_id', Event::query()->accessibleBy($user)->select('events.id'))
+                    ->where('ulid', $value)
+                    ->firstOrFail();
+            });
+        }
 
         Password::defaults(
             fn (): Password => Password::min(10)->letters()->mixedCase()->numbers()

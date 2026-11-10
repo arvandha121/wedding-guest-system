@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\EventController;
 use App\Http\Controllers\Api\V1\EventMemberController;
 use App\Http\Controllers\Api\V1\EventSessionController;
+use App\Http\Controllers\Api\V1\GuestController;
 use App\Http\Controllers\Api\V1\HealthController;
 use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Support\Facades\Route;
@@ -54,7 +56,24 @@ Route::name('api.v1.')->group(function (): void {
             Route::post('{event}/members', [EventMemberController::class, 'store'])->name('members.store');
             Route::delete('{event}/members/{user}', [EventMemberController::class, 'destroy'])->name('members.destroy');
             Route::post('{event}/receptionists', [EventMemberController::class, 'storeReceptionist'])->name('receptionists.store');
+
+            Route::get('{event}/categories', [CategoryController::class, 'index'])->name('categories.index');
+            Route::post('{event}/categories', [CategoryController::class, 'store'])->name('categories.store');
+
+            Route::get('{event}/guests', [GuestController::class, 'index'])->name('guests.index');
+            Route::post('{event}/guests', [GuestController::class, 'store'])->name('guests.store');
+            Route::post('{event}/guests/bulk-delete', [GuestController::class, 'bulkDelete'])->name('guests.bulk-delete');
+            Route::post('{event}/guests/bulk-category', [GuestController::class, 'bulkCategory'])->name('guests.bulk-category');
+            Route::get('{event}/guests/import-template', [GuestController::class, 'template'])->name('guests.template');
+            Route::post('{event}/guests/import', [GuestController::class, 'import'])->name('guests.import');
+            Route::get('{event}/guests/export', [GuestController::class, 'export'])->name('guests.export');
         });
+
+        Route::get('guests/{guest}', [GuestController::class, 'show'])->name('guests.show');
+        Route::put('guests/{guest}', [GuestController::class, 'update'])->name('guests.update');
+        Route::delete('guests/{guest}', [GuestController::class, 'destroy'])->name('guests.destroy');
+        Route::put('categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+        Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
         Route::put('sessions/{eventSession}', [EventSessionController::class, 'update'])->name('sessions.update');
         Route::delete('sessions/{eventSession}', [EventSessionController::class, 'destroy'])->name('sessions.destroy');

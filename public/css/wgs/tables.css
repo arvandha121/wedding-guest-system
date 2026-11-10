@@ -1,0 +1,5 @@
+/* Tabel */
+table thead{background:#f4f6f2}
+table th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:#6b736b}
+table tbody tr{transition:background .12s}table tbody tr:hover{background:#f8faf7}
+.overflow-x-auto{border-radius:var(--r)}

@@ -1,0 +1,9 @@
+/* Tombol */
+button,a.bg-accent,a.border{border-radius:10px;font-weight:500;cursor:pointer;transition:transform .12s,box-shadow .15s,background .15s}
+.bg-accent{background:linear-gradient(135deg,var(--ac2),var(--ac));box-shadow:0 6px 14px -6px rgba(31,77,63,.65)}
+.bg-accent:hover{background:linear-gradient(135deg,#348a6f,var(--ac));transform:translateY(-1px)}
+button:active,.bg-accent:active{transform:translateY(0) scale(.98)}
+button.border,a.border{border-color:var(--ln);background:#fff}
+button.border:hover,a.border:hover{background:#f1f4f0;border-color:#cfd6cc}
+button.is-loading{opacity:.7;pointer-events:none;position:relative}
+button.is-loading::after{content:"";display:inline-block;width:.9em;height:.9em;margin-left:.55em;vertical-align:-.12em;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:wgs-spin .6s linear infinite}

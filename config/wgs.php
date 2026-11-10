@@ -22,6 +22,12 @@ return [
     */
     'themes' => ['classic', 'minimal', 'garden'],
 
+    /* Kategori tamu bawaan yang dibuat otomatis untuk setiap acara. */
+    'default_guest_categories' => [
+        'VIP', 'Keluarga Mempelai Pria', 'Keluarga Mempelai Wanita', 'Teman Mempelai Pria',
+        'Teman Mempelai Wanita', 'Rekan Kerja', 'Tetangga', 'Tamu Umum',
+    ],
+
     /*
     | Batas percobaan login per menit untuk kombinasi email + IP.
     */

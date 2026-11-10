@@ -1,0 +1,4 @@
+/* Notifikasi */
+[role=status],[role=alert]{position:relative;border-radius:12px!important;box-shadow:var(--sh);padding-right:2.5rem!important;animation:wgs-in .3s ease both;transition:opacity .3s,transform .3s}
+[role=status].wgs-out{opacity:0;transform:translateY(-6px)}
+.wgs-x{position:absolute;right:.6rem;top:.45rem;border:0!important;background:none!important;font-size:1.2rem;line-height:1;opacity:.5;padding:.1rem .4rem}.wgs-x:hover{opacity:1}

@@ -1,0 +1,5 @@
+/* Halaman login */
+body:has(>main.max-w-sm){display:grid;place-items:center;padding:1.25rem}
+main.max-w-sm{min-height:0;width:100%;max-width:26rem;background:#fff;border:1px solid var(--ln);border-radius:22px;padding:2.4rem 2rem;box-shadow:0 20px 50px -20px rgba(20,35,28,.25);animation:wgs-in .45s ease both}
+main.max-w-sm>p:first-child{font-weight:600;color:var(--ac);font-size:.85rem;text-transform:uppercase;letter-spacing:.12em}
+main.max-w-sm button[type=submit]{padding:.75rem 1rem}

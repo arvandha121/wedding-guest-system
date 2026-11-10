@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\EventMemberController;
 use App\Http\Controllers\Admin\EventSessionController;
+use App\Http\Controllers\Admin\GuestController as WebGuestController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\HomeController;
@@ -42,6 +43,16 @@ Route::middleware(['auth', 'active'])->group(function (): void {
         Route::post('events/{event}/members', [EventMemberController::class, 'store'])->name('members.store');
         Route::delete('events/{event}/members/{user}', [EventMemberController::class, 'destroy'])->name('members.destroy');
         Route::post('events/{event}/receptionists', [EventMemberController::class, 'storeReceptionist'])->name('receptionists.store');
+
+        Route::get('events/{event}/guests', [WebGuestController::class, 'index'])->name('events.guests.index');
+        Route::get('events/{event}/guests/create', [WebGuestController::class, 'create'])->name('events.guests.create');
+        Route::post('events/{event}/guests', [WebGuestController::class, 'store'])->name('events.guests.store');
+        Route::post('events/{event}/guests/import', [WebGuestController::class, 'import'])->name('events.guests.import');
+        Route::get('events/{event}/guests/import-template', [WebGuestController::class, 'template'])->name('events.guests.template');
+        Route::get('events/{event}/guests/export', [WebGuestController::class, 'export'])->name('events.guests.export');
+        Route::get('guests/{guest}/edit', [WebGuestController::class, 'edit'])->name('guests.edit');
+        Route::put('guests/{guest}', [WebGuestController::class, 'update'])->name('guests.update');
+        Route::delete('guests/{guest}', [WebGuestController::class, 'destroy'])->name('guests.destroy');
 
         Route::middleware('role:super_admin')->prefix('users')->name('users.')->group(function (): void {
             Route::get('/', [UserController::class, 'index'])->name('index');
