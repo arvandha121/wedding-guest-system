@@ -3,3 +3,10 @@ table thead{background:#f4f6f2}
 table th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:#6b736b}
 table tbody tr{transition:background .12s}table tbody tr:hover{background:#f8faf7}
 .overflow-x-auto{border-radius:var(--r)}
+td button:not([class*=bg-]):not(.border){padding:.25rem .55rem;border-radius:8px}
+td button:not([class*=bg-]):not(.border):not(.text-danger){color:var(--ac)}
+td button:not([class*=bg-]):not(.border):hover,td a:hover{background:#eef3ef}
+td a{padding:.25rem .45rem;border-radius:8px;transition:background .15s}
+nav[role=navigation] [aria-current=page]>span{background:var(--ac)!important;color:#fff!important;border-color:var(--ac)!important}
+nav[role=navigation] a:hover{background:#eef3ef!important;color:var(--ac)!important}
+nav[role=navigation] a,nav[role=navigation] span>span{border-color:var(--ln)!important}

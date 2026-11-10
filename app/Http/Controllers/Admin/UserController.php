@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\ChangeUserStatusRequest;
 use App\Http\Requests\User\ListUsersRequest;
 use App\Http\Requests\User\StoreUserRequest;
-use App\Http\Requests\User\UpdateUserRequest;
+use App\Http\Requests\User\UpdateUserWebRequest;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
@@ -63,7 +63,7 @@ final class UserController extends Controller
         return view('admin.users.edit', ['user' => $user]);
     }
 
-    public function update(UpdateUserRequest $request, User $user): RedirectResponse
+    public function update(UpdateUserWebRequest $request, User $user): RedirectResponse
     {
         $this->users->update($user, $request->validated());
 

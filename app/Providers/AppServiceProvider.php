@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\EventSession;
 use App\Models\Guest;
 use App\Models\GuestCategory;
+use App\Models\Invitation;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -51,7 +52,7 @@ class AppServiceProvider extends ServiceProvider
                 ->firstOrFail();
         });
 
-        foreach (['guest' => Guest::class, 'category' => GuestCategory::class] as $param => $model) {
+        foreach (['guest' => Guest::class, 'category' => GuestCategory::class, 'invitation' => Invitation::class] as $param => $model) {
             Route::bind($param, function (string $value) use ($model) {
                 $user = request()->user();
                 abort_if($user === null, 404);
@@ -71,6 +72,8 @@ class AppServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request): Limit {
             return Limit::perMinute(120)->by($request->user()?->getAuthIdentifier() ?: $request->ip());
         });
+
+        RateLimiter::for('public-invitation', fn (Request $request): Limit => Limit::perMinute(30)->by($request->ip()));
 
         RateLimiter::for('auth-login', function (Request $request): array {
             $email = mb_strtolower((string) $request->input('email'));

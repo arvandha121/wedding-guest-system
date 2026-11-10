@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title') — {{ config('app.name') }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('css/wgs.css') }}">
     <script type="module" src="{{ asset('js/wgs.js') }}"></script>
@@ -13,24 +16,27 @@
 
     <aside class="fixed inset-y-0 left-0 z-40 w-60 -translate-x-full border-r border-line bg-white transition-transform lg:translate-x-0"
            :class="{ 'translate-x-0': sidebar }">
-        <div class="px-5 py-5">
-            <p class="text-base font-semibold">{{ config('app.name') }}</p>
+        <div class="brand">
+            <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+            <b>{{ config('app.name') }}</b>
         </div>
-        <nav class="space-y-1 px-3" aria-label="Menu utama">
-            <x-nav-link :href="route(auth()->user()->homeRouteName())" :active="request()->routeIs(auth()->user()->homeRouteName())">
+        <p class="side-label">Menu</p>
+        <nav class="px-3" aria-label="Menu utama">
+            <x-nav-link icon="home" :href="route(auth()->user()->homeRouteName())" :active="request()->routeIs(auth()->user()->homeRouteName())">
                 Dashboard
             </x-nav-link>
             @if (auth()->user()->role->isAdmin())
-                <x-nav-link :href="route('admin.events.index')" :active="request()->routeIs('admin.events.*')">
+                <x-nav-link icon="calendar" :href="route('admin.events.index')" :active="request()->routeIs('admin.events.*')">
                     Acara
                 </x-nav-link>
             @endif
             @if (auth()->user()->isSuperAdmin())
-                <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                <x-nav-link icon="users" :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
                     Pengguna
                 </x-nav-link>
             @endif
         </nav>
+        <div class="side-foot">Masuk sebagai<b>{{ auth()->user()->role->label() }}</b></div>
     </aside>
 
     <div class="lg:pl-60">

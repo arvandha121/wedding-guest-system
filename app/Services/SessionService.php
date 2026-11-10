@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Enums\SessionStatus;
+use App\Exceptions\ApiException;
 use App\Models\Event;
 use App\Models\EventSession;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 final class SessionService
 {
@@ -36,6 +38,10 @@ final class SessionService
      */
     public function delete(EventSession $session): void
     {
+        if (DB::table('invitation_sessions')->where('event_session_id', $session->id)->exists()) {
+            throw new ApiException('Sesi sudah dipakai oleh undangan dan tidak dapat dihapus.', 'SESSION_IN_USE', 409);
+        }
+
         $session->delete();
     }
 

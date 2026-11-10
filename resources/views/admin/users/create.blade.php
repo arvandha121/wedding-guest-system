@@ -6,6 +6,6 @@
 @endsection
 
 @section('content')
-    <h1 class="mb-6 text-2xl font-semibold">Tambah pengguna</h1>
+    <div class="page-head"><div><h1>Tambah pengguna</h1><p>Buat akun untuk Event Admin atau Resepsionis.</p></div></div>
     @include('admin.users._form')
 @endsection

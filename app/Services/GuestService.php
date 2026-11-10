@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Enums\InvitationStatus;
 use App\Models\Event;
 use App\Models\Guest;
 use App\Models\GuestCategory;
+use App\Models\Invitation;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 final class GuestService
 {
@@ -71,15 +74,23 @@ final class GuestService
         return $guest->refresh()->load('category');
     }
 
+    /** QR milik tamu yang dihapus langsung tidak berlaku. */
     public function delete(Guest $guest): void
     {
-        $guest->delete();
+        DB::transaction(function () use ($guest): void {
+            Invitation::query()
+                ->where('guest_id', $guest->id)
+                ->where('status', '!=', InvitationStatus::Revoked->value)
+                ->update(['status' => InvitationStatus::Revoked->value, 'revoked_at' => now(), 'revoke_reason' => 'Tamu dihapus']);
+
+            $guest->delete();
+        });
     }
 
     /** @param list<string> $ulids */
     public function bulkDelete(Event $event, array $ulids): int
     {
-        return Guest::query()->where('event_id', $event->id)->whereIn('ulid', $ulids)->get()->each->delete()->count();
+        return Guest::query()->where('event_id', $event->id)->whereIn('ulid', $ulids)->get()->each(fn (Guest $guest) => $this->delete($guest))->count();
     }
 
     /** @param list<string> $ulids */

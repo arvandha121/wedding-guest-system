@@ -8,3 +8,6 @@ label.block{margin-bottom:.1rem;color:#2b332e}
 .wgs-pw button{position:absolute;right:.45rem;top:50%;transform:translateY(-50%);border:0;background:none;font-size:.75rem;color:var(--ac);padding:.3rem .5rem}
 fieldset{background:#fff;border:1px solid var(--ln);border-radius:var(--r);padding:1.25rem 1.4rem 1.4rem;box-shadow:var(--sh);min-width:0}
 legend{font-weight:600;color:var(--ac);padding:0 .5rem;margin-left:-.5rem}
+input[type=file]{font-size:.85rem;color:#6b736b}
+input[type=file]::file-selector-button{margin-right:.75rem;padding:.5rem .9rem;border:1px solid var(--ln);border-radius:10px;background:#fff;color:var(--ac);font-weight:500;cursor:pointer;transition:background .15s}
+input[type=file]::file-selector-button:hover{background:#eef3ef}

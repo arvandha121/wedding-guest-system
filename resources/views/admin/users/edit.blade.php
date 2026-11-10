@@ -6,6 +6,6 @@
 @endsection
 
 @section('content')
-    <h1 class="mb-6 text-2xl font-semibold">Ubah pengguna</h1>
+    <div class="page-head"><div><h1>Ubah pengguna</h1><p>{{ $user->email }}</p></div></div>
     @include('admin.users._form')
 @endsection

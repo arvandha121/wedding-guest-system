@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\EventMemberController;
 use App\Http\Controllers\Api\V1\EventSessionController;
 use App\Http\Controllers\Api\V1\GuestController;
 use App\Http\Controllers\Api\V1\HealthController;
+use App\Http\Controllers\Api\V1\InvitationController;
 use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,6 +61,10 @@ Route::name('api.v1.')->group(function (): void {
             Route::get('{event}/categories', [CategoryController::class, 'index'])->name('categories.index');
             Route::post('{event}/categories', [CategoryController::class, 'store'])->name('categories.store');
 
+            Route::get('{event}/invitations', [InvitationController::class, 'index'])->name('invitations.index');
+            Route::post('{event}/invitations', [InvitationController::class, 'store'])->name('invitations.store');
+            Route::post('{event}/invitations/send', [InvitationController::class, 'sendAll'])->name('invitations.send');
+
             Route::get('{event}/guests', [GuestController::class, 'index'])->name('guests.index');
             Route::post('{event}/guests', [GuestController::class, 'store'])->name('guests.store');
             Route::post('{event}/guests/bulk-delete', [GuestController::class, 'bulkDelete'])->name('guests.bulk-delete');
@@ -68,6 +73,14 @@ Route::name('api.v1.')->group(function (): void {
             Route::post('{event}/guests/import', [GuestController::class, 'import'])->name('guests.import');
             Route::get('{event}/guests/export', [GuestController::class, 'export'])->name('guests.export');
         });
+
+        Route::get('invitations/{invitation}', [InvitationController::class, 'show'])->name('invitations.show');
+        Route::put('invitations/{invitation}/sessions', [InvitationController::class, 'sessions'])->name('invitations.sessions');
+        Route::post('invitations/{invitation}/generate-qr', [InvitationController::class, 'regenerate'])->name('invitations.regenerate');
+        Route::post('invitations/{invitation}/revoke', [InvitationController::class, 'revoke'])->name('invitations.revoke');
+        Route::post('invitations/{invitation}/resend', [InvitationController::class, 'resend'])->name('invitations.resend');
+        Route::get('invitations/{invitation}/deliveries', [InvitationController::class, 'deliveries'])->name('invitations.deliveries');
+        Route::get('invitations/{invitation}/qr.webp', [InvitationController::class, 'qr'])->name('invitations.qr');
 
         Route::get('guests/{guest}', [GuestController::class, 'show'])->name('guests.show');
         Route::put('guests/{guest}', [GuestController::class, 'update'])->name('guests.update');

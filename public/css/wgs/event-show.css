@@ -1,0 +1,113 @@
+/* Halaman detail acara (admin/events/show) — pakai class ev-* agar tidak bergantung build Tailwind */
+.ev-head{display:flex;flex-wrap:wrap;gap:1rem;align-items:flex-start;justify-content:space-between}
+.ev-title{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.ev-meta{margin:.45rem 0 0;color:#6b736b;font-size:.92rem}
+.ev-actions{display:flex;gap:.6rem;flex-wrap:wrap}
+.ev-btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.6rem 1.15rem;border:1px solid var(--ln);border-radius:10px;background:#fff;color:#1f2421;font-size:.9rem;font-weight:500;text-decoration:none;cursor:pointer;transition:background .15s,transform .12s,box-shadow .15s}
+.ev-btn:hover{background:#eef3ef;transform:translateY(-1px)}
+.ev-btn.primary{border-color:transparent;color:#fff;background:linear-gradient(135deg,var(--ac2),var(--ac));box-shadow:0 6px 14px -6px rgba(31,77,63,.65)}
+.ev-btn.primary:hover{background:linear-gradient(135deg,#348a6f,var(--ac))}
+.ev-btn.danger{color:#9b2c2c;border-color:#f0cccc}.ev-btn.danger:hover{background:#fef2f2}
+.ev-btn.sm{padding:.4rem .8rem;font-size:.82rem}
+.ev-link{border:0;background:none;padding:0;color:var(--ac);font-size:.85rem;cursor:pointer}.ev-link:hover{text-decoration:underline}.ev-link.danger{color:#9b2c2c}
+.ev-card{margin-top:1.5rem;background:#fff;border:1px solid var(--ln);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
+.ev-ch{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;padding:.95rem 1.25rem;border-bottom:1px solid var(--ln);background:#fafbf9}
+.ev-ch h2{margin:0;font-size:.95rem;font-weight:600}.ev-ch p{margin:0;font-size:.82rem;color:#6b736b}
+.ev-body{padding:1.1rem 1.25rem}
+.ev-note{margin-top:1.25rem;padding:.8rem 1rem;border:1px solid #f1dfae;border-radius:12px;background:#fff8e6;color:#6b5314;font-size:.9rem}
+.ev-note.red{border-color:#fecaca;background:#fef2f2;color:#7f1d1d}
+
+/* Alur status */
+.ev-steps{display:flex;padding:1.4rem 1rem .6rem;overflow-x:auto}
+.ev-step{position:relative;flex:1;min-width:6.5rem;text-align:center}
+.ev-step i{position:relative;z-index:1;display:grid;place-items:center;width:2rem;height:2rem;margin:0 auto .45rem;border-radius:50%;background:#eceee8;color:#6b736b;font-style:normal;font-weight:600;font-size:.85rem}
+.ev-step::before{content:"";position:absolute;top:1rem;left:-50%;right:50%;height:2px;background:var(--ln)}
+.ev-step:first-child::before{display:none}
+.ev-step span{font-size:.8rem;color:#6b736b}
+.ev-step.done i{background:var(--ac2);color:#fff}.ev-step.done::before,.ev-step.cur::before{background:var(--ac2)}
+.ev-step.cur i{background:var(--ac);color:#fff;box-shadow:0 0 0 5px rgba(47,122,98,.18)}
+.ev-step.cur span{color:#1f2421;font-weight:600}
+.ev-state{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between;padding:.9rem 1.25rem 1.2rem}
+.ev-state p{margin:0;color:#4b524c;font-size:.9rem;flex:1 1 16rem}
+.ev-state div{display:flex;gap:.5rem;flex-wrap:wrap}
+
+/* Ringkasan */
+.ev-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1px;margin:0;background:var(--ln)}
+.ev-info>div{background:#fff;padding:1rem 1.25rem}
+.ev-info dt{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:#6b736b}
+.ev-info dd{margin:.3rem 0 0;font-weight:500;line-height:1.45}
+.ev-info small{display:block;margin-top:.15rem;font-weight:400;color:#6b736b}
+
+/* Sesi */
+.ev-sess{display:flex;gap:1rem;padding:1rem 1.25rem;border-bottom:1px solid var(--ln)}
+.ev-time{flex:0 0 4.8rem;padding-right:1rem;border-right:2px solid var(--ln);text-align:center}
+.ev-time b{display:block;font-size:1.25rem;line-height:1.2}.ev-time small{color:#6b736b;font-size:.75rem}
+.ev-sbody{flex:1;min-width:0}
+.ev-srow{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:space-between}
+.ev-srow p{margin:0}.ev-srow .n{font-weight:600}.ev-srow .t{color:#6b736b;font-size:.88rem}
+.ev-sbody details{margin-top:.6rem}
+.ev-sbody summary,.ev-add summary{cursor:pointer;color:var(--ac);font-size:.85rem;font-weight:500;list-style:none}
+.ev-sbody summary::-webkit-details-marker,.ev-add summary::-webkit-details-marker{display:none}
+.ev-sbody summary:hover{text-decoration:underline}
+.ev-add{padding:1rem 1.25rem}.ev-add summary{display:inline-block;padding:.5rem 1rem;border:1px dashed #b9c8bd;border-radius:10px}
+.ev-add summary:hover{background:#eef3ef}
+.ev-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.9rem;margin-top:.9rem;align-items:end}
+.ev-form .full{grid-column:1/-1}.ev-form label{display:block;margin-bottom:.25rem;font-size:.85rem;font-weight:500}
+.ev-empty{padding:1.6rem 1.25rem;text-align:center;color:#6b736b;font-size:.92rem}
+
+/* Penugasan */
+.ev-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(21rem,1fr));gap:1.25rem;margin-top:1.5rem}
+.ev-cols .ev-card{margin-top:0}
+.ev-person{display:flex;align-items:center;gap:.75rem;padding:.7rem 1.25rem;border-bottom:1px solid var(--ln)}
+.ev-person .av{display:grid;place-items:center;flex:0 0 2.2rem;height:2.2rem;border-radius:50%;background:#e3efe8;color:var(--ac);font-weight:600;font-size:.85rem}
+.ev-person div{flex:1;min-width:0}.ev-person b{display:block;font-weight:500}.ev-person small{display:block;overflow:hidden;text-overflow:ellipsis;color:#6b736b}
+.ev-assign{display:flex;flex-wrap:wrap;gap:.6rem;align-items:end;padding:1rem 1.25rem}.ev-assign>*:first-child{flex:1 1 12rem}
+.ev-danger{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;padding:1rem 1.25rem}
+.ev-danger p{margin:0;color:#4b524c;font-size:.9rem;flex:1 1 16rem}
+@media(max-width:640px){.ev-sess{flex-direction:column;gap:.6rem}.ev-time{flex:none;display:flex;gap:.5rem;align-items:baseline;border:0;padding:0;text-align:left}}
+
+/* ===== Penyegaran tampilan ===== */
+.ev-hero{align-items:center;padding:1.9rem 2rem;border-radius:22px;color:#fff;background:radial-gradient(520px 220px at 95% 0,rgba(255,255,255,.18),transparent 70%),linear-gradient(135deg,#2f7a62,#1a4036);box-shadow:0 24px 40px -26px rgba(31,77,63,.75)}
+.ev-hero h1{font-size:1.9rem;font-weight:600;line-height:1.2;letter-spacing:-.02em}
+.ev-hero .inline-flex{background:rgba(255,255,255,.95);border-color:transparent;color:#1a4036}
+.ev-couple{margin:.4rem 0 0;font-size:1rem;opacity:.88}
+.ev-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.1rem}
+.ev-chips span{display:inline-flex;align-items:center;gap:.45rem;padding:.4rem .85rem;border-radius:999px;background:rgba(255,255,255,.14);font-size:.84rem}
+.ev-chips svg{width:1rem;height:1rem;flex:none}
+.ev-hero .ev-btn{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.35);color:#fff;box-shadow:none}
+.ev-hero .ev-btn:hover{background:rgba(255,255,255,.24)}
+.ev-hero .ev-btn.primary{background:#fff;border-color:#fff;color:var(--ac);font-weight:600}
+.ev-hero .ev-btn.primary:hover{background:#f0f7f3}
+.ev-card{margin-top:1.25rem}
+.ev-ch{padding:1.05rem 1.4rem;background:#fff}
+.ev-ch h2{font-size:1rem}
+.ev-note{border-radius:14px}
+
+/* Alur status */
+.ev-steps{padding:1.8rem 1.4rem .8rem}
+.ev-step i{width:2.4rem;height:2.4rem;font-size:.9rem}
+.ev-step::before{top:1.2rem;height:3px;border-radius:2px}
+.ev-step span{font-size:.84rem}
+.ev-step.done span{color:var(--ac2)}
+.ev-state{margin:.4rem 1.4rem 1.4rem;padding:.9rem 1.1rem;border-radius:14px;background:var(--soft)}
+
+/* Ringkasan: tanpa blok abu-abu pada baris terakhir */
+.ev-info{gap:0;background:#fff}
+.ev-info>div{padding:1.15rem 1.4rem;border-right:1px solid var(--ln);border-bottom:1px solid var(--ln);margin:0 -1px -1px 0}
+.ev-info dd{font-size:.98rem}
+.ev-card:has(.ev-info){overflow:hidden}
+
+/* Sesi */
+.ev-sess{padding:1.15rem 1.4rem;align-items:flex-start}
+.ev-time{flex:0 0 5rem;padding:.55rem .3rem;border:0;border-radius:12px;background:var(--soft);color:var(--ac)}
+.ev-time small{display:block;color:var(--ac2);font-weight:500}
+.ev-add{padding:1.1rem 1.4rem}
+.ev-add summary{border-radius:11px;font-weight:600}
+
+/* Penugasan */
+.ev-person{padding:.85rem 1.4rem}
+.ev-person .av{background:linear-gradient(135deg,var(--ac2),var(--ac));color:#fff}
+.ev-assign{padding:1.1rem 1.4rem;background:#fafcfb}
+.ev-btn{border-radius:11px}
+.ev-info{grid-template-columns:repeat(auto-fit,minmax(14rem,1fr))}
+.ev-info>div{border-right:0;margin:0 0 -1px}

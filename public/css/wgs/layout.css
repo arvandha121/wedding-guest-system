@@ -6,11 +6,11 @@ aside nav a{border-radius:10px;padding:.65rem .85rem;font-weight:500;transition:
 aside nav a:hover{background:#eef3ef;transform:translateX(2px)}
 aside nav a[aria-current]{background:linear-gradient(135deg,var(--ac2),var(--ac));box-shadow:0 6px 14px -6px rgba(31,77,63,.7);transform:none}
 /* Header */
-body>div>header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.82);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--ln)}
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.82);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--ln)}
 .wgs-avatar{display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:50%;background:linear-gradient(135deg,var(--ac2),var(--ac));color:#fff;font-weight:600;font-size:.9rem}
 /* Konten */
 main>div{animation:wgs-in .35s ease both}
 h1{letter-spacing:-.02em}
 .rounded.border.border-line.bg-white{border-radius:var(--r);border-color:var(--ln);box-shadow:var(--sh)}
-section.rounded>h2{font-weight:600;background:#fafbf9;border-radius:var(--r) var(--r) 0 0}
+section.rounded:not([class*=" p-"])>h2{font-weight:600;background:#fafbf9;border-radius:var(--r) var(--r) 0 0}
 dl>div{transition:background .15s}dl>div:hover{background:#fafbf9}

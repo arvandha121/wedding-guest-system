@@ -5,13 +5,21 @@ use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\EventMemberController;
 use App\Http\Controllers\Admin\EventSessionController;
 use App\Http\Controllers\Admin\GuestController as WebGuestController;
+use App\Http\Controllers\Admin\InvitationController as WebInvitationController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Public\InvitationController as PublicInvitationController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Receptionist\DashboardController as ReceptionistDashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/dashboard');
+
+// Halaman undangan untuk tamu (tanpa login)
+Route::middleware('throttle:public-invitation')->group(function (): void {
+    Route::get('/i/{token}', [PublicInvitationController::class, 'show'])->name('invitation.public');
+    Route::get('/i/{token}/qr.webp', [PublicInvitationController::class, 'qr'])->name('invitation.public.qr');
+});
 
 Route::middleware('guest')->group(function (): void {
     Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
@@ -53,6 +61,15 @@ Route::middleware(['auth', 'active'])->group(function (): void {
         Route::get('guests/{guest}/edit', [WebGuestController::class, 'edit'])->name('guests.edit');
         Route::put('guests/{guest}', [WebGuestController::class, 'update'])->name('guests.update');
         Route::delete('guests/{guest}', [WebGuestController::class, 'destroy'])->name('guests.destroy');
+
+        Route::get('events/{event}/invitations', [WebInvitationController::class, 'index'])->name('events.invitations.index');
+        Route::post('events/{event}/invitations', [WebInvitationController::class, 'store'])->name('events.invitations.store');
+        Route::post('events/{event}/invitations/send', [WebInvitationController::class, 'sendAll'])->name('events.invitations.send');
+        Route::get('invitations/{invitation}/preview', [WebInvitationController::class, 'preview'])->name('invitations.preview');
+        Route::get('invitations/{invitation}/qr.webp', [WebInvitationController::class, 'qr'])->name('invitations.qr');
+        Route::post('invitations/{invitation}/resend', [WebInvitationController::class, 'resend'])->name('invitations.resend');
+        Route::post('invitations/{invitation}/regenerate', [WebInvitationController::class, 'regenerate'])->name('invitations.regenerate');
+        Route::post('invitations/{invitation}/revoke', [WebInvitationController::class, 'revoke'])->name('invitations.revoke');
 
         Route::middleware('role:super_admin')->prefix('users')->name('users.')->group(function (): void {
             Route::get('/', [UserController::class, 'index'])->name('index');

@@ -1,11 +1,6 @@
 /* Entry point: tambah/hapus modul di sini */
 @import url('wgs/fallback.css');
-@import url('wgs/base.css');
-@import url('wgs/layout.css');
-@import url('wgs/buttons.css');
-@import url('wgs/forms.css');
-@import url('wgs/tables.css');
-@import url('wgs/badge.css');
-@import url('wgs/alerts.css');
-@import url('wgs/login.css');
+@import url('wgs/theme.css');
 @import url('wgs/animations.css');
+@import url('wgs/responsive.css');
+@import url('wgs/event-show.css');
